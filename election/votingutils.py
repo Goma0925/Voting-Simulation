@@ -1,24 +1,4 @@
-import random
 from election.voting_rules import rule_names
-
-def get_ballots(candidate_num, voter_num):
-    """
-    :param candidate_num: Number of candidates
-    :param voter_num: Number of voters
-    :return: 2D list of lists. Each list contains the random preference order of candidates.
-    """
-    if (candidate_num < 2):
-        raise Exception("candidate_num has to be more than 1.")
-    candidates = []
-    for i in range(candidate_num):
-        candidates.append(i+1)
-
-    all_ballots = []
-    ballot = []
-    for i in range(voter_num):
-        random.shuffle(candidates)
-        all_ballots.append(candidates.copy())
-    return all_ballots
 
 
 def init_score_board(candidates: list):
@@ -31,18 +11,21 @@ def init_score_board(candidates: list):
         score_board[candidate] = 0
     return score_board
 
-def get_result_container(rule_name, score_board):
+
+def get_result_container(rule_name:str, score_board: dict):
     """
+    * A supporter function to unify the output format of voting_rules' functions.
     :param rule_name: Name of the rule used
     :param score_board: A dict of vote score counts: eg) {"CANDIDATE-A": 10, "CANDIDATES-B":3, ...}
     :return: Creates a election result container with the rule name.
     """
     return {"RULE": rule_name, "score_board": score_board}
 
+
 def get_winners(result_container):
     """
     :param score_board: A election result container generated using get_result_container
-    :return: List of winners
+    :return: List of winners.
     """
     max_vote_count = 0
     winners = []
@@ -62,7 +45,7 @@ def get_winners(result_container):
 
 def is_condorcet_winner(copeland_result_container):
     """
-    :param copeland_result_container: result_container of from count_in_copeland
+    :param copeland_result_container: result_container of count_in_copeland's result.
     :return: True if the result outputs the condorcet winner. False otherwise
     """
     score_board = copeland_result_container["score_board"]
