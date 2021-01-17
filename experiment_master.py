@@ -1,9 +1,9 @@
 from election.io.file_output_buffer import DataPointBuffer
 import os
 from questions import frequency_condorcet_winners, borda_chooses_condorcet_winner, no_condorcet_winners, plurality_chooses_condorcet_winner
-CANDIDATE_NUM_MAX = 4
-VOTER_NUM_MAX = 10
-ITERATION_NUM = 10
+CANDIDATE_NUM_MAX = 100
+VOTER_NUM_MAX = 1000
+ITERATION_NUM = 10000
 
 def start_experiment(experiment, output_file_name):
     iteration = ITERATION_NUM
