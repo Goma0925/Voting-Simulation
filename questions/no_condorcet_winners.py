@@ -28,12 +28,15 @@ def is_indentical(list_a:list, list_b:list):
 
 
 def experiment(candidate_num, voter_num, iteration, buffer: DataPointBuffer):
-    count = 0
+    indentical_borda_plurality = 0
+    indentical_copeland_plurality = 0
+    indentical_copeland_borda = 0
+    indentical_all = 0
     for i in range(iteration):
         #Get profile that does not have condorcet winner
         ballots = non_d_condrcet(candidate_num, voter_num)
         print("------------------------")
-        print("Profile(Voter="+str(len(ballots))+"):", str(ballots))
+        #     + "Profile(Voter="+str(len(ballots))+"):", str(ballots))
 
         copeland_winners = get_winners(copeland.count_in_copeland(ballots))
         copeland_winners.sort()
@@ -45,17 +48,33 @@ def experiment(candidate_num, voter_num, iteration, buffer: DataPointBuffer):
         plurality_winners.sort()
 
         #Count how many times all the rules elect the same candidates
-        if is_indentical(copeland_winners, borda_winners):
-            if is_indentical(copeland_winners, plurality_winners):
-                count += 1
+        copeland_plurality_indentical_flag = False
+        if is_indentical(copeland_winners, plurality_winners):
+            indentical_copeland_plurality += 1
+            copeland_plurality_indentical_flag = True
+        
+        if is_indentical(borda_winners, plurality_winners):
+            indentical_borda_plurality += 1
+            # Count up if all the rules yield the same result.
+            if copeland_plurality_indentical_flag == True:
+                indentical_all += 1
 
-        print("Copeland winners : " + str(copeland_winners))
-        print("Borda winners    : " + str(borda_winners))
-        print("Plurality winners: " + str(plurality_winners))
-    buffer.write(str(candidate_num), str(voter_num), str(count))
-    print("\nWith non D_Condorcet profile, all three rules matched their results " + str(count) + "/" + str(iteration) + " times")
-    print("Candidate:", str(candidate_num))
-    print("Voters   :", str(voter_num))
+        if is_indentical(copeland_winners, borda_winners):
+            indentical_copeland_borda += 1
+
+        print("Copeland winners : " + str(copeland_winners) + "\n"
+            + "Borda winners    : " + str(borda_winners)+ "\n"
+            + "Plurality winners: " + str(plurality_winners))
+
+    buffer.write(str(candidate_num), str(voter_num), str(indentical_copeland_plurality) 
+            + "," + str(indentical_borda_plurality) + "," + str(indentical_copeland_borda) + ","
+            + str(indentical_all))
+    print("\nWith non D_Condorcet profile, the three rules matched their results as following (Candidates="
+        + str(candidate_num)+"Voters"+str(voter_num)+"):"+ "\n"
+        + "Copeland & Plurality match:" + str(indentical_copeland_plurality) + "/" + str(iteration) + " times"+ "\n"
+        + "Borda    & Plurality match:" + str(indentical_borda_plurality) + "/" + str(iteration) + " times"+ "\n"
+        + "Copeland & Borda macth    :" + str(indentical_copeland_borda) + "/" + str(iteration) + " times"+ "\n"
+        + "All rules macth           :" + str(indentical_all) + "/" + str(iteration) + " times" + "\n")
 
 
 if __name__ == '__main__':
