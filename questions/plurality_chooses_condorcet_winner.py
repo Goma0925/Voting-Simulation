@@ -14,23 +14,24 @@ def experiment(candidate_num, voter_num, iteration, buffer: DataPointBuffer):
     count = 0
     for i in range(iteration):
         ballots = d_condorcet(candidate_num, voter_num)
-        print("------------------------")
-        print("Profile(Voter="+str(len(ballots))+"):", str(ballots))
+        # print("------------------------")
+        # print("Profile(Voter="+str(len(ballots))+"):", str(ballots))
 
         #Get the condorcet winner using copeland
         condorcet_winner_list = get_winners(copeland.count_in_copeland(ballots))
         if len(condorcet_winner_list) > 1:
             raise Exception("There should not be more than one condorcet winner")
         condorcet_winner = condorcet_winner_list[0]
-        print(" Condorcet winner : " + str(condorcet_winner_list))
+        # print(" Condorcet winner : " + str(condorcet_winner_list))
 
         #Check if Plurality chooses the condorcet winner
         plurality_winners = get_winners(plurality.count_in_plurality(ballots))
-        print(" Plurality winners: " + str(plurality_winners))
+        # print(" Plurality winners: " + str(plurality_winners))
         if condorcet_winner in plurality_winners:
             count += 1
     buffer.write(str(candidate_num), str(voter_num), str(count))
-    print("Usng D-Condorcet profile, Plurality chose Condorcet winners " + str(count) + "/" + str(iteration) + " times.")
+    # print("Usng D-Condorcet profile, Plurality chose Condorcet winners " + str(count) + "/" + str(iteration) + " times."
+    #     + "(Candidates="+str(candidate_num)+ ",Voters=" +str(voter_num))
 
 
 if __name__ == '__main__':

@@ -3,8 +3,8 @@ from election.io.logger import ErrorLogger
 import os
 from typing import Callable
 from questions import frequency_condorcet_winner_exists, borda_chooses_condorcet_winner, no_condorcet_winners, plurality_chooses_condorcet_winner
-CANDIDATE_MIN = 7
-CANDIDATE_NUM_MAX = 20
+CANDIDATE_MIN = 15
+CANDIDATE_NUM_MAX = 100
 VOTER_NUM_MAX = 100
 ITERATION_NUM = 1000
 
@@ -33,7 +33,7 @@ def start_experiment(experiment: Callable, output_file_name):
 
 if __name__ == '__main__':
     print("Starting experiments...")
-    # start_experiment(frequency_condorcet_winner_exists.experiment, "condorcet_winner_frequency.csv")
-    # start_experiment(borda_chooses_condorcet_winner.experiment, "borda_chooses_condorcet_winner.csv")
-    # start_experiment(no_condorcet_winners.experiment, "no_condorcet_winners.csv")
-    # start_experiment(plurality_chooses_condorcet_winner.experiment, "plurality_chooses_condorcet_winner.csv")
+    start_experiment(frequency_condorcet_winner_exists.experiment, "condorcet_winner_frequency.csv")
+    start_experiment(borda_chooses_condorcet_winner.experiment, "borda_chooses_condorcet_winner.csv")
+    start_experiment(no_condorcet_winners.experiment, "no_condorcet_winners.csv")
+    start_experiment(plurality_chooses_condorcet_winner.experiment, "plurality_chooses_condorcet_winner.csv")

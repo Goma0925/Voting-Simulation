@@ -35,7 +35,7 @@ def experiment(candidate_num, voter_num, iteration, buffer: DataPointBuffer):
     for i in range(iteration):
         #Get profile that does not have condorcet winner
         ballots = non_d_condrcet(candidate_num, voter_num)
-        print("------------------------")
+        # print("------------------------")
         #     + "Profile(Voter="+str(len(ballots))+"):", str(ballots))
 
         copeland_winners = get_winners(copeland.count_in_copeland(ballots))
@@ -62,19 +62,19 @@ def experiment(candidate_num, voter_num, iteration, buffer: DataPointBuffer):
         if is_indentical(copeland_winners, borda_winners):
             indentical_copeland_borda += 1
 
-        print("Copeland winners : " + str(copeland_winners) + "\n"
-            + "Borda winners    : " + str(borda_winners)+ "\n"
-            + "Plurality winners: " + str(plurality_winners))
+        # print("Copeland winners : " + str(copeland_winners) + "\n"
+        #     + "Borda winners    : " + str(borda_winners)+ "\n"
+        #     + "Plurality winners: " + str(plurality_winners))
 
     buffer.write(str(candidate_num), str(voter_num), str(indentical_copeland_plurality) 
             + "," + str(indentical_borda_plurality) + "," + str(indentical_copeland_borda) + ","
             + str(indentical_all))
-    print("\nWith non D_Condorcet profile, the three rules matched their results as following (Candidates="
-        + str(candidate_num)+"Voters"+str(voter_num)+"):"+ "\n"
-        + "Copeland & Plurality match:" + str(indentical_copeland_plurality) + "/" + str(iteration) + " times"+ "\n"
-        + "Borda    & Plurality match:" + str(indentical_borda_plurality) + "/" + str(iteration) + " times"+ "\n"
-        + "Copeland & Borda macth    :" + str(indentical_copeland_borda) + "/" + str(iteration) + " times"+ "\n"
-        + "All rules macth           :" + str(indentical_all) + "/" + str(iteration) + " times" + "\n")
+    # print("\nWith non D_Condorcet profile, the three rules matched their results as following (Candidates="
+    #     + str(candidate_num)+"Voters"+str(voter_num)+"):"+ "\n"
+    #     + "Copeland & Plurality match:" + str(indentical_copeland_plurality) + "/" + str(iteration) + " times"+ "\n"
+    #     + "Borda    & Plurality match:" + str(indentical_borda_plurality) + "/" + str(iteration) + " times"+ "\n"
+    #     + "Copeland & Borda macth    :" + str(indentical_copeland_borda) + "/" + str(iteration) + " times"+ "\n"
+    #     + "All rules macth           :" + str(indentical_all) + "/" + str(iteration) + " times" + "\n")
 
 
 if __name__ == '__main__':
