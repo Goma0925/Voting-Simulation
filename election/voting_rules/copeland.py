@@ -31,7 +31,6 @@ def count_in_copeland(ballots):
             elif (b_is_preferred_to_a > a_is_preferred_to_b):
                 score_board[candidate_b] += 1
             else:
-                #If the copland scores are equal, give half a point to both candidates? @
                 pass
     return get_result_container(rule_names.COPELAND, score_board)
 
