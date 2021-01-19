@@ -1,7 +1,7 @@
 """
     This script is to study and answer the questions:
         • How often does a Condorcet winner exist?
-    Since Copeland rule always returns the condorcet winners, it uses copeland rule to detect Condorcet winners.
+    Since Copeland rule always returns the condorcet winners when it exists, it uses copeland rule to detect Condorcet winners.
 """
 from election.votingutils import *
 from election.voting_rules.copeland import count_in_copeland
