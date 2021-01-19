@@ -2,9 +2,6 @@
     This script is to study and answer the questions:
         • When the Condorcet winner does not exist, do Borda, plurality, and Copeland select the
         same alternative? How often do they coincide with each other?
-
-        A: They do ocasionally produce the same results, but the probability is low.
-            And as the number of voters/candidates increases, it gets even lower.
 """
 from election.voting_rules import copeland, borda, plurality
 from election.votingutils import *
