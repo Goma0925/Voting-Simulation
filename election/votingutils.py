@@ -37,7 +37,6 @@ def get_winners(result_container):
             winners.append(candidate)
             max_vote_count = score_board[candidate]
         elif (score_board[candidate] == max_vote_count):
-            #If you find a tie, add it to winners.
             # If you find a tie, add it to winners.
             winners.append(candidate)
     return winners
