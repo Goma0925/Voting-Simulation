@@ -1,8 +1,6 @@
 """
     This script is to study and answer the questions:
         • How often does Borda choose the Condorcet winner?
-            A: Borda does not always chooses Condorcet winner, especially when the
-                number of voters increases.
 """
 from election.profiles import d_condorcet
 from election.voting_rules import copeland, borda
