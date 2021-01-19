@@ -1,8 +1,6 @@
 """
     This script is to study and answer the questions:
         • How often does Plurality choose the Condorcet winner?
-         A: Plurality rule does NOT always choose a condorcet winner, but it does most of the times.
-            As the number of voters increases, the likelihood of choosing the condorcet winner decreases.
 """
 from election.profiles import d_condorcet
 from election.voting_rules import copeland, plurality
